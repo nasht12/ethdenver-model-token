@@ -28,6 +28,7 @@ export default function NavTabs() {
         <Tab label="list datasets" value="listdatasets" />
         <Tab label="publish ai models" value="aimodels" />
         <Tab label="publish datasets" value="datasets" />
+        <Tab label="contract" value="contract" />
       </Tabs>
     </Box>
   );

@@ -9,7 +9,11 @@ import Typography from "@mui/material/Typography";
 
 function ListModels({ models }) {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const handleOpen = (rowData) => {
+    setOpen(true);
+    setSelectedRow(rowData);
+  };
   const handleClose = () => setOpen(false);
 
   const columns = [
@@ -30,15 +34,15 @@ function ListModels({ models }) {
       width: 300,
     },
     {
-      field: "cid",
-      headerName: "Content Identifier",
+      field: "ipfsHash",
+      headerName: "IPFS hash",
       width: 200,
     },
-    {
-      field: "contractaddress",
-      headerName: "Contract Address",
-      width: 200,
-    },
+    // {
+    //   field: "contractaddress",
+    //   headerName: "Contract Address",
+    //   width: 200,
+    // },
     {
       field: "view",
       headerName: "",
@@ -49,7 +53,7 @@ function ListModels({ models }) {
             variant="contained"
             size="small"
             type="submit"
-            onClick={handleOpen}
+            onClick={() => handleOpen(params.row)}
             sx={{ backgroundColor: "#212121" }}
           >
             View
@@ -74,20 +78,59 @@ function ListModels({ models }) {
               }}
             >
               <Typography
-                id="modal-modal-title"
-                variant="h6"
-                component="h2"
+                id="modal-modal-name"
+                // variant="h6"
+                // component="h2"
                 sx={{
                   backgroundColor: "white",
                   color: "black",
                   padding: "10px",
                 }}
               >
-                Text in a modal
+                <b>Name</b>: {selectedRow ? selectedRow.name : ""}
               </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+              <Typography
+                id="modal-modal-category"
+                sx={{
+                  // mt: 2,
+                  backgroundColor: "white",
+                  color: "black",
+                  padding: "10px",
+                }}
+              >
+                <b>Category</b>: {selectedRow ? selectedRow.category : ""}
               </Typography>
+              <Typography
+                id="modal-modal-ipfshash"
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  padding: "10px",
+                }}
+              >
+                <b>Description</b>: {selectedRow ? selectedRow.description : ""}
+              </Typography>
+              <Typography
+                id="modal-modal-ipfshash"
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  padding: "10px",
+                }}
+              >
+                <b>IPFS</b>: {selectedRow ? selectedRow.ipfsHash : ""}
+              </Typography>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{
+                  backgroundColor: "#212121",
+                  marginTop: "20px",
+                  marginLeft: "10px",
+                }}
+              >
+                Mint
+              </Button>
             </Box>
           </Modal>
         </>

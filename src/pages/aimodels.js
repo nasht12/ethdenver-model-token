@@ -90,7 +90,7 @@ function AiModels() {
             )}
           </CardContent>
         </Card>
-        <form action="/api/datasets" method="POST">
+        <form action="/api/models" method="POST">
           <TextField
             label="Name"
             name="name"

@@ -16,11 +16,9 @@ model datasets {
 }
 
 model models {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  category        String
-  cid             String
-  contractaddress String
-  description     String
-  name            String
-  tokenhash       String
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  category    String
+  description String
+  ipfsHash    String
+  name        String
 }

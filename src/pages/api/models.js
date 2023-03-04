@@ -8,9 +8,9 @@ export default async function handle(req, res) {
 
   console.log("session", session.expires);
   try {
-    const result = { res: "Dataset created" };
+    const result = { res: "Model added" };
 
-    await prisma.datasets.create({
+    await prisma.models.create({
       data: {
         name,
         description,
