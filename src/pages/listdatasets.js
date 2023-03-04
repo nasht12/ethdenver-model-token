@@ -8,10 +8,19 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { Web3Button } from "@thirdweb-dev/react";
+import { useContract, useContractWrite, useMintNFT } from "@thirdweb-dev/react";
 
 function ListDatasets({ datasets }) {
+  const { contract } = useContract(
+    "0xEE8c259589C78578171F64953e0def41a3b386aE"
+  );
+  const { mutateAsync: mintTo, isLoading } = useContractWrite(
+    contract,
+    "mintTo"
+  );
   const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
+  // const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const handleOpen = (rowData) => {
@@ -19,13 +28,16 @@ function ListDatasets({ datasets }) {
     setSelectedRow(rowData);
   };
 
+  const onMint = () => {
+    setOpen(false);
+  };
+
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
     { field: "category", headerName: "Category", width: 100 },
     { field: "name", headerName: "Name", width: 200 },
     { field: "description", headerName: "Description", width: 300 },
-    { field: "ipfsHash", headerName: "Content Identifier", width: 200 },
-    { field: "contractaddress", headerName: "Contract Address", width: 200 },
+    { field: "ipfsHash", headerName: "Content Identifier", width: 600 },
     {
       field: "view",
       headerName: "",
@@ -103,9 +115,10 @@ function ListDatasets({ datasets }) {
               >
                 <b>IPFS</b>: {selectedRow ? selectedRow.ipfsHash : ""}
               </Typography>
-              <Button
+              {/* <Button
                 variant="contained"
                 type="submit"
+                onClick={mint}
                 sx={{
                   backgroundColor: "#212121",
                   marginTop: "20px",
@@ -113,7 +126,20 @@ function ListDatasets({ datasets }) {
                 }}
               >
                 Mint
-              </Button>
+              </Button> */}
+              <Web3Button
+                contractAddress="0xEE8c259589C78578171F64953e0def41a3b386aE"
+                action={(contract) => {
+                  contract.call(
+                    "mintTo",
+                    "0x88a85353695A2Cd4f411Ad0095123DaABd53eC93",
+                    selectedRow.ipfsHash
+                  );
+                }}
+                onSubmit={onMint}
+              >
+                Mint
+              </Web3Button>
             </Box>
           </Modal>
         </div>

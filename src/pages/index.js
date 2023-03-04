@@ -7,11 +7,18 @@ import Header from "../components/header";
 import Layout from "../components/Layout";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Typography from "@mui/material/Typography";
+import { ConnectWallet } from "@thirdweb-dev/react";
+import { useContract, useContractRead } from "@thirdweb-dev/react";
 
 import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
   const { data: session } = useSession();
+  const { contract } = useContract(
+    "0xa75A56762c828818A9d5cfb110f30C15d73686A2"
+  );
+  const { data, isLoading } = useContractRead(contract, "symbol");
+  const { name } = useContractRead(contract, "name");
   return (
     <>
       <Head>
@@ -30,7 +37,9 @@ export default function Home() {
             {" "}
             AI Model and Dataset Tokenizer
           </Typography>
-          <ConnectButton />
+          <ConnectWallet />
+          {data}
+          {name}
         </div>
       </Layout>
     </>

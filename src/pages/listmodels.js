@@ -6,8 +6,16 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Web3Button, useContract, useContractWrite } from "@thirdweb-dev/react";
 
 function ListModels({ models }) {
+  const { contract } = useContract(
+    "0xEE8c259589C78578171F64953e0def41a3b386aE"
+  );
+  const { mutateAsync: mintTo, isLoading } = useContractWrite(
+    contract,
+    "mintTo"
+  );
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
   const handleOpen = (rowData) => {
@@ -15,6 +23,9 @@ function ListModels({ models }) {
     setSelectedRow(rowData);
   };
   const handleClose = () => setOpen(false);
+  const onMint = () => {
+    setOpen(false);
+  };
 
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
@@ -35,14 +46,9 @@ function ListModels({ models }) {
     },
     {
       field: "ipfsHash",
-      headerName: "IPFS hash",
-      width: 200,
+      headerName: "Content Identifier",
+      width: 600,
     },
-    // {
-    //   field: "contractaddress",
-    //   headerName: "Contract Address",
-    //   width: 200,
-    // },
     {
       field: "view",
       headerName: "",
@@ -120,7 +126,7 @@ function ListModels({ models }) {
               >
                 <b>IPFS</b>: {selectedRow ? selectedRow.ipfsHash : ""}
               </Typography>
-              <Button
+              {/* <Button
                 variant="contained"
                 type="submit"
                 sx={{
@@ -130,7 +136,20 @@ function ListModels({ models }) {
                 }}
               >
                 Mint
-              </Button>
+              </Button> */}
+              <Web3Button
+                contractAddress="0xEE8c259589C78578171F64953e0def41a3b386aE"
+                action={(contract) => {
+                  contract.call(
+                    "mintTo",
+                    "0x88a85353695A2Cd4f411Ad0095123DaABd53eC93",
+                    selectedRow.ipfsHash
+                  );
+                }}
+                onSubmit={onMint}
+              >
+                Mint
+              </Web3Button>
             </Box>
           </Modal>
         </>
