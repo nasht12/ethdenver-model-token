@@ -7,6 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model datasets {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  category    String
+  description String
+  ipfsHash    String
+  name        String
+}
+
 model models {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   category        String

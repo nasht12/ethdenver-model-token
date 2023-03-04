@@ -9,24 +9,16 @@ const columns = [
   { field: "category", headerName: "Category", width: 100 },
   { field: "name", headerName: "Name", width: 200 },
   { field: "description", headerName: "Description", width: 300 },
-  { field: "cid", headerName: "Content Identifier", width: 200 },
+  { field: "ipfsHash", headerName: "Content Identifier", width: 200 },
   { field: "contractaddress", headerName: "Contract Address", width: 200 },
 ];
 
-const rows = [
-  { id: 1, name: "John Doe", email: "john.doe@example.com", age: 30 },
-  { id: 2, name: "Jane Smith", email: "jane.smith@example.com", age: 25 },
-  { id: 3, name: "Bob Johnson", email: "bob.johnson@example.com", age: 45 },
-  { id: 4, name: "Mary Williams", email: "mary.williams@example.com", age: 35 },
-  { id: 5, name: "Tom Brown", email: "tom.brown@example.com", age: 50 },
-];
-
-function Text({ models }) {
+function ListDatasets({ models }) {
   console.log("models", models);
   return (
     <Layout>
       <div style={{ height: 400, width: "100%" }}>
-        <DataGrid rows={models} columns={columns} />
+        <DataGrid rows={models} columns={columns} disableSelectionOnClick />
       </div>
     </Layout>
   );
@@ -38,17 +30,17 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: "/login",
+        destination: "/",
         permanent: false,
       },
     };
   }
 
-  const models = await prisma.models.findMany();
+  const models = await prisma.datasets.findMany();
 
   return {
     props: { models },
   };
 }
 
-export default Text;
+export default ListDatasets;

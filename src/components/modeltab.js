@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import { useRouter } from "next/router";
 
 export default function NavTabs() {
-  const [value, setValue] = React.useState("text");
+  const [value, setValue] = React.useState("listmodels");
   const router = useRouter();
   const { pathname } = router;
 
@@ -22,11 +22,11 @@ export default function NavTabs() {
   return (
     <Box sx={{ width: "100%" }}>
       <Tabs value={value} onChange={handleChange} aria-label="nav tabs example">
-        <Tab label="text" value="text" />
-        <Tab label="media" value="media" />
-        <Tab label="code" value="code" />
-        <Tab label="publish" value="publish" />
-        <Tab label="about" value="about" />
+        <Tab label="list models" value="listmodels" />
+        <Tab label="list datasets" value="listdatasets" />
+        {/* <Tab label="publish" value="publish" disabled /> */}
+        <Tab label="publish ai models" value="aimodels" />
+        <Tab label="publish datasets" value="datasets" />
       </Tabs>
     </Box>
   );
