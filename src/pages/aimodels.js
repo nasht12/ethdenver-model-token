@@ -76,7 +76,7 @@ function AiModels() {
               }}
             >
               <Typography variant="body1" gutterBottom sx={{ margin: "20px" }}>
-                Uploade AI Model
+                Upload AI Model:
               </Typography>
               <input type="file" onChange={onChange} />
             </div>
@@ -119,7 +119,11 @@ function AiModels() {
             variant="standard"
             margin="normal"
           />
-          <Button variant="contained" color="primary" type="submit">
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{ backgroundColor: "#212121" }}
+          >
             Publish
           </Button>
         </form>

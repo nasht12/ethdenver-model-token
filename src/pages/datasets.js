@@ -138,7 +138,11 @@ function Datasets() {
             variant="standard"
             margin="normal"
           />
-          <Button variant="contained" color="primary" type="submit">
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{ backgroundColor: "#212121" }}
+          >
             Publish
           </Button>
         </form>
