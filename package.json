@@ -16,16 +16,19 @@
     "@mui/material": "^5.11.11",
     "@mui/x-data-grid": "^5.17.25",
     "@prisma/client": "^4.11.0",
+    "@rainbow-me/rainbowkit": "^0.11.1",
     "buffer": "^6.0.3",
     "dotenv": "^16.0.3",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
+    "ethers": "^5.7.2",
     "ipfs-http-client": "^60.0.0",
     "next": "13.2.3",
     "next-auth": "^4.20.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "^6.8.2"
+    "react-router-dom": "^6.8.2",
+    "wagmi": "^0.11.7"
   },
   "devDependencies": {
     "prisma": "^4.11.0"

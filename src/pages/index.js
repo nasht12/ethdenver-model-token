@@ -5,6 +5,8 @@ import LoggedInAppBar from "../components/loggedin";
 import LoginAppBar from "../components/login";
 import Header from "../components/header";
 import Layout from "../components/Layout";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Typography from "@mui/material/Typography";
 
 import { useSession, signIn, signOut } from "next-auth/react";
 
@@ -19,7 +21,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <main className={styles.main}>AI Model Tokenizer</main>
+        <div>
+          <Typography
+            variant="h6"
+            gutterBottom
+            sx={{ backgroundColor: "white", color: "black", padding: "10px" }}
+          >
+            {" "}
+            AI Model and Dataset Tokenizer
+          </Typography>
+          <ConnectButton />
+        </div>
       </Layout>
     </>
   );

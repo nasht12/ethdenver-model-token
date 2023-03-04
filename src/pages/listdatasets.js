@@ -9,10 +9,15 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-function ListDatasets({ models }) {
+function ListDatasets({ datasets }) {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const handleOpen = (rowData) => {
+    setOpen(true);
+    setSelectedRow(rowData);
+  };
 
   const columns = [
     { field: "id", headerName: "ID", width: 100 },
@@ -31,7 +36,7 @@ function ListDatasets({ models }) {
             variant="contained"
             size="small"
             type="submit"
-            onClick={handleOpen}
+            onClick={() => handleOpen(params.row)}
             sx={{ backgroundColor: "#212121" }}
           >
             View
@@ -55,23 +60,71 @@ function ListDatasets({ models }) {
                 p: 4,
               }}
             >
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
+              <Typography
+                id="modal-modal-name"
+                // variant="h6"
+                // component="h2"
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  padding: "10px",
+                }}
+              >
+                <b>Name</b>: {selectedRow ? selectedRow.name : ""}
               </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+              <Typography
+                id="modal-modal-category"
+                sx={{
+                  // mt: 2,
+                  backgroundColor: "white",
+                  color: "black",
+                  padding: "10px",
+                }}
+              >
+                <b>Category</b>: {selectedRow ? selectedRow.category : ""}
               </Typography>
+              <Typography
+                id="modal-modal-ipfshash"
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  padding: "10px",
+                }}
+              >
+                <b>Description</b>: {selectedRow ? selectedRow.description : ""}
+              </Typography>
+              <Typography
+                id="modal-modal-ipfshash"
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  padding: "10px",
+                }}
+              >
+                <b>IPFS</b>: {selectedRow ? selectedRow.ipfsHash : ""}
+              </Typography>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{
+                  backgroundColor: "#212121",
+                  marginTop: "20px",
+                  marginLeft: "10px",
+                }}
+              >
+                Mint
+              </Button>
             </Box>
           </Modal>
         </div>
       ),
     },
   ];
-  console.log("models", models);
+  console.log("models", datasets);
   return (
     <Layout>
       <div style={{ height: 400, width: "100%" }}>
-        <DataGrid rows={models} columns={columns} disableSelectionOnClick />
+        <DataGrid rows={datasets} columns={columns} disableSelectionOnClick />
       </div>
     </Layout>
   );
@@ -89,10 +142,10 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const models = await prisma.datasets.findMany();
+  const datasets = await prisma.datasets.findMany();
 
   return {
-    props: { models },
+    props: { datasets },
   };
 }
 

@@ -28,17 +28,6 @@ export default function NavTabs() {
         <Tab label="list datasets" value="listdatasets" />
         <Tab label="publish ai models" value="aimodels" />
         <Tab label="publish datasets" value="datasets" />
-        <Tab
-          label="Wallet"
-          value="wallet"
-          component={Button}
-          sx={{
-            marginLeft: "auto",
-            marginRight: "105px",
-            backgroundColor: "grey",
-          }}
-          // onClick={handleWalletTabClick}
-        />
       </Tabs>
     </Box>
   );

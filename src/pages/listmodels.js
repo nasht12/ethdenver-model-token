@@ -43,7 +43,6 @@ function ListModels({ models }) {
       field: "view",
       headerName: "",
       width: 200,
-      headerClassName: "bold",
       renderCell: (params) => (
         <>
           <Button
@@ -74,7 +73,16 @@ function ListModels({ models }) {
                 p: 4,
               }}
             >
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                sx={{
+                  backgroundColor: "white",
+                  color: "black",
+                  padding: "10px",
+                }}
+              >
                 Text in a modal
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
